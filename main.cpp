@@ -7,6 +7,9 @@ int main()
     printf("El printf no jala pa nada");
     if(true) {
         std::cout << "El printf no jala pa nada";
+
+    }  else {
+        std::cout << "El printf no jala pa nada";
     }
     return 0;
 }
