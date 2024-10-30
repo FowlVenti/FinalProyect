@@ -6,7 +6,7 @@ int main()
     std::cout << "Perroooo desgraciado" << std::endl;
     printf("El printf no jala pa nada");
     if(true) {
-        std::cout << "El printf no jala pa nada";
+        std::cout << "El printf no jallla pa nada";
 
     }  else {
         std::cout << "El printf no jala pa nada";
