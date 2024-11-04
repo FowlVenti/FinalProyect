@@ -5,10 +5,17 @@
 #include <ctime>
 using namespace std;
 
-
+int* siguienteGalaxia() {
+    srand(time(nullptr));
+    int* list = new int[3];
+    list[0] = rand() % 10;
+    list[1] = rand() % 10;
+    list[2] = rand() % 10;
+    return list;
+}
 
 int main() {
-    srand(time(nullptr));
+
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     int option = 0, optionDice = 0;
 
@@ -20,17 +27,18 @@ int main() {
         SetConsoleTextAttribute(hConsole, 10);
         printf("Welcome to the Intergalactic Traveler's Guide \n");
         do {
-            const int dado1 = rand()%10, dado2 = rand()%10, dado3 = rand()%10;
+
             printf("[0] Exit \n");
             printf("[1] Roll the dice \n");
             printf("Select the option: ");
+            scanf("%d", &optionDice);
 
             SetConsoleTextAttribute(hConsole, 3);
+            int * dados = siguienteGalaxia();
 
-            scanf("%d", &optionDice);
-            printf("Dice 1: %d \n",dado1);
-            printf("Dice 2: %d \n",dado2);
-            printf("Dice 3: %d \n\n",dado3);
+            printf("Dice 1: %d \n",dados[0]);
+            printf("Dice 2: %d \n",dados[1]);
+            printf("Dice 3: %d \n\n",dados[2]);
 
         }
         while (optionDice != 0);
