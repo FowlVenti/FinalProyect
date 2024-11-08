@@ -1,4 +1,5 @@
 **/CMakeCache.txt
 **/editor.xml
 **/cmake_install.cmake
-**/LastTest.log
+**/.idea/
+**/cmake-build-debug
