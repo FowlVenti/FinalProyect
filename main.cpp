@@ -71,7 +71,7 @@ bool cercanas(int dados[], int *distan){//Retorna verdadero si la proxima galaxi
 
 int main() {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    int option = 0, fila=0, colum=-1, ubi=1, optionDice = 0,galAct[3], distancia=0;//variable original
+    int option = 0, fila=0, colum=0, ubi=1, optionDice = 0,galAct[3], distancia=0;//variable original
     int *distan= &distancia;//puntero con respectiva dirección
     galAct[0]=0;
     galAct[1]=0;
