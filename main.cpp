@@ -33,7 +33,7 @@ void tablero(int filax, int comlumx) {//tablero visual
     }
 }
 
-int casilla(int &fila, int &colum, int *distan, int &ubi, int &optionDice,int &aster, int &contrlMenu) {//saber en que casilla esta
+int casilla(int &fila, int &colum, int *distan, int &ubi, int &optionDice,int &aster) {//saber en que casilla esta
     ubi=0;
     colum += *distan;//saber en que columna esta
     if(colum>8) {//saber cuando hay cambio de fila para el tablero(coordenadas)
@@ -52,17 +52,16 @@ int casilla(int &fila, int &colum, int *distan, int &ubi, int &optionDice,int &a
     else if (ubi==33) {//termiar juego por culpa del hoyo negro
         printf("You fell into the black hole (space 33) \n");
         printf("You die \n");
-        optionDice = 0;
-        contrlMenu=1;
+        optionDice = 0;//para que salga del juego
+
 
     }
     else if (ubi>=42) {//ganar
         printf("You win!!!!!!!!!!! \n");
         colum=5;
         fila=4;
-        optionDice = 0;
+        optionDice = 0;//para que salga del juego
         ubi=42;
-        contrlMenu=1;
     }
     return 0;
 }
@@ -103,7 +102,7 @@ bool cercanas(int dados[], int *distan, int &galSumAct){//Retorna verdadero si l
 }
 
 int main() {
-    int menu=0, contrlMenu=0; // Menu para repetir el juego y la otra checar que sea en caso
+    int option=0; // Menu para repetir el juego y la otra checar que sea en caso
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);                            //ganar o perder
     do {
 
@@ -111,7 +110,7 @@ int main() {
         int colora = rand() % 15;
         int colord=rand()%15;//colores aleatorios
         int aster=0;//control de casilla 23
-        int option = 0, fila=0, colum=0, ubi=1, optionDice = 0,galAct[3],tiros=0,galSumAct=0, distancia=0;//variables
+        int fila=0, colum=0, ubi=1, optionDice = 0,galAct[3],tiros=0,galSumAct=0, distancia=0;//variables
         int *distan= &distancia;//puntero con respectiva dirección
         galAct[0]=0;//Para poder tener el valor de la galaxia en donde se esta
         galAct[1]=0;
@@ -154,7 +153,7 @@ int main() {
                         galAct[1]=dados[1];//si es que no avanza después
                         galAct[2]=dados[2];
                         printf("Nearby galaxy, you can advance %d spaces\n", *distan);
-                        casilla(fila,colum,distan,ubi,optionDice,aster, contrlMenu);
+                        casilla(fila,colum,distan,ubi,optionDice,aster);
                         if (aster==1) {//control casilla 23, solo cuando es llevado por el cinturon
                             galAct[0]=3;//Galaxia al regresar a la casilla 23 por el cinturon
                             galAct[1]=4;//de asteroides
@@ -171,11 +170,10 @@ int main() {
 
                 }
                 else if(optionDice!=0 && optionDice!=1){//por si se ingresa una opción inválida
-                    printf("Give me a valid option\n");
+                    printf("\nGive me a valid option\n");
                 }
                 else {//si sale del juego
                     printf("Game over\n");
-                    contrlMenu=1;
                 }
             }
             while (optionDice != 0);
@@ -186,13 +184,11 @@ int main() {
         else {
             printf("Goodbye \n");
         }
-        if (contrlMenu==1){
+        //esta aparte por cuestiones de visualización en pantalla
+        if (option!=0){//se imprime solo si el usuario se sale, pierde o gana la partida anterior
             SetConsoleTextAttribute(hConsole, colord);
-        printf("\n\n");
-        printf("You wanna play again?\n");
-        printf("[0] No, close\n");
-        printf("[1] Yes, play again\n");
-        scanf("%d", &menu);
+            printf("\n\n");
+            printf("You wanna play again?\n");
         }
-    }while(menu!=0);
+    }while(option!=0);
 }
