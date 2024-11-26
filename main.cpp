@@ -71,9 +71,9 @@ int* siguienteGalaxia(int &tiros) {//Detalle, el dado puede dar 0
     tiros++;//contar los tiros
     srand(time(nullptr));
     int* list = new int[3];
-    list[0] = rand() % 10;
-    list[1] = rand() % 10;
-    list[2] = rand() % 10;
+    list[0] = rand() % 9 + 1;
+    list[1] = rand() % 9 + 1;
+    list[2] = rand() % 9 + 1;
     return list;//los valores de los 3 dados se guardan en la lista
 }
 
@@ -120,11 +120,11 @@ int main() {
         printf("[1] Start game \n");
         printf("Select the option please:");
         scanf("%d", &option);
-        if (option != 0) {//jugar o no
+        if (option==1 ) {//jugar o no
             SetConsoleTextAttribute(hConsole, colora);//color
             printf("Welcome to the Intergalactic Traveler's Guide \n");
             do {
-                if(tiros==0) {//primer tablero , se imprime al empezar para que el usuario lo vea
+                if(tiros==0 && optionDice==0) {//primer tablero , se imprime al empezar para que el usuario lo vea
                     printf("\n");
                     tablero(fila,colum);
                     printf("You are in space 1 \t Galaxy: 000\n\n");
@@ -169,7 +169,7 @@ int main() {
                     printf("Galaxy:%d%d%d\n\n", galAct[0],galAct[1],galAct[2]);
 
                 }
-                else if(optionDice!=0 && optionDice!=1){//por si se ingresa una opción inválida
+                else if(optionDice<0 || optionDice>1){//por si se ingresa una opción inválida
                     printf("\nGive me a valid option\n");
                 }
                 else {//si sale del juego
@@ -181,11 +181,14 @@ int main() {
 
 
         }
+        else if(option<0 || option>1) {//opcion válida en menú principal
+            printf("\nGive me a valid option\n");
+        }
         else {
             printf("Goodbye \n");
         }
         //esta aparte por cuestiones de visualización en pantalla
-        if (option!=0){//se imprime solo si el usuario se sale, pierde o gana la partida anterior
+        if (option==1){//se imprime solo si el usuario se sale, pierde o gana la partida anterior
             SetConsoleTextAttribute(hConsole, colord);
             printf("\n\n");
             printf("You wanna play again?\n");
